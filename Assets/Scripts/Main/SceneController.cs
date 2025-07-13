@@ -8,6 +8,7 @@ public static class Scenes {
     public const string Play = "PlayScene";
     public const string Player = "Player";
     public const string DeathWallScene = "DeathWallScene";
+    public const string ObstaclesSceneCF = "ObstaclesSceneCF";
 }
 
 public class SceneController : MonoBehaviour {
