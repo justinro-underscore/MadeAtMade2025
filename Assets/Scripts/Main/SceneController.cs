@@ -7,12 +7,14 @@ public static class Scenes {
     public const string Base = "BaseScene";
     public const string Play = "PlayScene";
     public const string Player = "Player";
+    public const string DeathWallScene = "DeathWallScene";
 }
 
 public class SceneController : MonoBehaviour {
     private IDictionary<string, GameState> gameSceneStateMapping = new Dictionary<string, GameState>() {
         {Scenes.Play, GameState.PLAY},
-        {Scenes.Player,GameState.PLAY}
+        {Scenes.Player,GameState.PLAY},
+        {Scenes.DeathWallScene, GameState.PLAY}
     };
 
     public static SceneController instance = null;
