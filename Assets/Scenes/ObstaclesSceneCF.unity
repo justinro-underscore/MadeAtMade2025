@@ -207,6 +207,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1 &1327160705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1327160706}
+  m_Layer: 0
+  m_Name: EndIslandSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1327160706
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327160705}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 18.411638, y: -11.415435, z: -0.18865882}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2053598128
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,66 +286,5 @@ MonoBehaviour:
   staticObstacleMedium: {fileID: 7579988160553239643, guid: fe8be723f7ccb944eaf32b974aaf8f50, type: 3}
   staticObstacleLarge: {fileID: 3278054835385005598, guid: 759064bc0ba49e341bdd33f4614161a7, type: 3}
   levelSize: {x: 1000, y: 1000}
-  endIsland: {fileID: 0}
-  endIslandSpawn: {fileID: 0}
---- !u!1001 &1902015124644154068
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3303903806511966940, guid: 86c3e4421b80a1249bf7f5c11a21a1b8, type: 3}
-      propertyPath: m_Name
-      value: Obstacle
-      objectReference: {fileID: 0}
-    - target: {fileID: 8424480414255124044, guid: 86c3e4421b80a1249bf7f5c11a21a1b8, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9069538004420454311, guid: 86c3e4421b80a1249bf7f5c11a21a1b8, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9069538004420454311, guid: 86c3e4421b80a1249bf7f5c11a21a1b8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9069538004420454311, guid: 86c3e4421b80a1249bf7f5c11a21a1b8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9069538004420454311, guid: 86c3e4421b80a1249bf7f5c11a21a1b8, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9069538004420454311, guid: 86c3e4421b80a1249bf7f5c11a21a1b8, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9069538004420454311, guid: 86c3e4421b80a1249bf7f5c11a21a1b8, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9069538004420454311, guid: 86c3e4421b80a1249bf7f5c11a21a1b8, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9069538004420454311, guid: 86c3e4421b80a1249bf7f5c11a21a1b8, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9069538004420454311, guid: 86c3e4421b80a1249bf7f5c11a21a1b8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9069538004420454311, guid: 86c3e4421b80a1249bf7f5c11a21a1b8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9069538004420454311, guid: 86c3e4421b80a1249bf7f5c11a21a1b8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 86c3e4421b80a1249bf7f5c11a21a1b8, type: 3}
+  endIsland: {fileID: 4368779224801251051, guid: 506e9ac2299f8ca4fb47da3a50f4c013, type: 3}
+  endIslandSpawn: {fileID: 1327160706}
