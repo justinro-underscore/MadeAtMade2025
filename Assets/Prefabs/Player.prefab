@@ -134,7 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonBall: {fileID: 6292524453310457085, guid: 72dff887031ead545933a54c233d789a, type: 3}
   rotationSpeed: 90
-  moveSpeed: 2.5
+  moveSpeed: 25
 --- !u!61 &3067015368248427093
 BoxCollider2D:
   m_ObjectHideFlags: 0
