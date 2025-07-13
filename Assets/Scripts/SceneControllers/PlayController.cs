@@ -12,11 +12,17 @@ public enum PlayerState
 public class PlayController : ISceneController
 {
     override protected GameState GetGameState() { return GameState.PLAY; }
-  
-    //Move Variables.
-    public float rotationSpeed = 90f;
-    public float moveSpeed = 2f;
 
+    //Cannon
+    [SerializeField]
+    private GameObject cannonBall;
+    //Move Variables.
+    [SerializeField]
+    private float rotationSpeed = 90f;
+    [SerializeField]
+    private float moveSpeed = 2f;
+
+    //State Machine
     private PlayerState playerState = PlayerState.moving;
     public static PlayController Instance { get; private set; }
 
@@ -28,12 +34,13 @@ public class PlayController : ISceneController
         else
             Destroy(gameObject);
     }
-
-    override protected void SceneUpdate()
+   
+    override protected async void SceneUpdate()
     {
         switch (playerState)
         {
             case PlayerState.moving:
+               
                 if (Input.GetKey(KeyCode.A))
                 {
                     // Rotate left around Z axis
@@ -49,7 +56,11 @@ public class PlayController : ISceneController
                    //Testing States
                    playerState = PlayerState.repair;
                 }
-
+                if (Input.GetKeyDown(KeyCode.O))
+                {
+                    //Testing States
+                    playerState = PlayerState.fire;
+                }
 
                 transform.position += transform.up * moveSpeed * Time.deltaTime;
                 break;
@@ -62,6 +73,12 @@ public class PlayController : ISceneController
                 }
                 break;
             case PlayerState.fire:
+
+                Instantiate(cannonBall, transform.position, transform.rotation);
+                
+                playerState = PlayerState.moving;
+
+               
                 break;
         } 
        
