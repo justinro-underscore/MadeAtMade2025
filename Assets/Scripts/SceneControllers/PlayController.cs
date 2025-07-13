@@ -22,6 +22,8 @@ public class PlayController : ISceneController
     [SerializeField]
     private float moveSpeed = 2f;
 
+    private float shipAngle;
+
     //State Machine
     private PlayerState playerState = PlayerState.moving;
     public static PlayController Instance { get; private set; }
@@ -39,8 +41,9 @@ public class PlayController : ISceneController
     {
         switch (playerState)
         {
+            
             case PlayerState.moving:
-               
+    
                 if (Input.GetKey(KeyCode.A))
                 {
                     // Rotate left around Z axis
@@ -61,8 +64,8 @@ public class PlayController : ISceneController
                     //Testing States
                     playerState = PlayerState.fire;
                 }
-
-                transform.position += transform.up * moveSpeed * Time.deltaTime;
+                transform.localEulerAngles = new Vector3(0, 0, shipAngle);
+                //  transform.position += transform.up * moveSpeed * Time.deltaTime;
                 break;
             case PlayerState.repair:
                 if (Input.GetKeyDown(KeyCode.P))
@@ -77,6 +80,7 @@ public class PlayController : ISceneController
                 Instantiate(cannonBall, transform.position, transform.rotation);
                 
                 playerState = PlayerState.moving;
+                transform.localEulerAngles.z = 20;
 
                
                 break;
