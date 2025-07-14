@@ -102,63 +102,14 @@ public class PlayController : ISceneController
                 //12
                 if (Input.GetKeyDown(KeyCode.Q))
                 {
-                    FireFunction(0);
+                    FireFunction(30);
                 }
                 //1
                 if (Input.GetKeyDown(KeyCode.W))
                 {
                     FireFunction(330);
                 }
-                //2
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    FireFunction(300);
-                }
-                //3
-                if (Input.GetKeyDown(KeyCode.R))
-                {
-                    FireFunction(270);
-                }
-                //4
-                if (Input.GetKeyDown(KeyCode.T))
-                {
-                    FireFunction(240);
-                }
-                //5
-                if (Input.GetKeyDown(KeyCode.Y))
-                {
-                    FireFunction(210);
-                }
-                //6
-                if (Input.GetKeyDown(KeyCode.U))
-                {
-                    FireFunction(180);
-                }
-                //7
-                if (Input.GetKeyDown(KeyCode.I))
-                {
-                    FireFunction(150);
-                }
-                //8
-                if (Input.GetKeyDown(KeyCode.O))
-                {
-                    FireFunction(120);
-                }
-                //9
-                if (Input.GetKeyDown(KeyCode.P))
-                {
-                    FireFunction(90);
-                }
-                //10
-                if (Input.GetKeyDown(KeyCode.LeftBracket))
-                {
-                    FireFunction(60);
-                }
-                //11
-                if (Input.GetKeyDown(KeyCode.RightBracket))
-                {
-                    FireFunction(30);
-                }
+              
 
                 break;
         }
