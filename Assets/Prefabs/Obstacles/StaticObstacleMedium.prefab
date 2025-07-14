@@ -67,6 +67,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+    - target: {fileID: 3834496856301183364, guid: 9c9ee9be67cbe1c429b20868bd7dba57, type: 3}
+      propertyPath: maxHealth
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6523985220122671453, guid: 9c9ee9be67cbe1c429b20868bd7dba57, type: 3}
       propertyPath: m_Name
       value: StaticObstacleMedium

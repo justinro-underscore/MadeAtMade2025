@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StaticObstacle
       objectReference: {fileID: 0}
+    - target: {fileID: 4784745227574620677, guid: 86c3e4421b80a1249bf7f5c11a21a1b8, type: 3}
+      propertyPath: maxHealth
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8424480414255124044, guid: 86c3e4421b80a1249bf7f5c11a21a1b8, type: 3}
       propertyPath: m_IsTrigger
       value: 0
