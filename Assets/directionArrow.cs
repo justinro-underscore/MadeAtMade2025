@@ -16,11 +16,12 @@ public class directionArrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 directionVector = new Vector2(0, 0);
-        Vector3 targetVector = target.position - gameObject.transform.position;
-        //float stepValue = 
+        Vector3 directionVector = new Vector3(0, 0, 0);
+        Vector3 targetVector = target.position - transform.position;
+        float stepValue = 1.0f * Time.deltaTime;
 
-        Vector3.RotateTowards(directionVector, targetVector, 7, 0.0f);
-        transform.LookAt(directionVector, new Vector3(0, 0, 1));
+        directionVector = Vector3.RotateTowards(transform.forward, targetVector, 100, 0.0f);
+        print(transform.up + ", " + directionVector + ", " + targetVector);
+        transform.LookAt(directionVector, Vector3.forward * -1); //rotation = Quaternion.LookRotation(directionVector); //
     }
 }
