@@ -58,11 +58,51 @@ public class PlayController : ISceneController
             
             case PlayerState.moving:
             RuntimeManager.StudioSystem.setParameterByName("PlayerState", 0.0f);
-                if (Input.GetKey(KeyCode.A))
+                if (Input.GetButton("Cancel"))
+                {
+                    print("button 0");
+                }
+                if (Input.GetButton("Fire1"))
+                {
+                    print("button fire1");
+                }
+                if (Input.GetButton("Fire2"))
+                {
+                    print("button fire2");
+                }
+                if (Input.GetButton("Fire3"))
+                {
+                    print("button Fire3");
+                }
+                if (Input.GetButton("Jump"))
+                {
+                    print("button Jump");
+                }
+                //if (Input.GetButton("JoystickButton5"))
+                //{
+                //    print("button 5");
+                //}
+                //if (Input.GetButton("JoystickButton6"))
+                //{
+                //    print("button 7");
+                //}
+                //if (Input.GetButton("JoystickButton8"))
+                //{
+                //    print("button 9");
+                //}
+                //if (Input.GetButton("JoystickButton10"))
+                //{
+                //    print("button 10");
+                //}
+                //if (Input.GetButton("JoystickButton11"))
+                //{
+                //    print("button 11");
+                //}
+                if (Input.GetKey(KeyCode.A) || Input.GetButton("Fire3"))
                 {
                     targetAngle += rotationSpeed *Time.deltaTime;
                 }
-                if (Input.GetKey(KeyCode.D))
+                if (Input.GetKey(KeyCode.D) || Input.GetButton("Jump"))
                 {
                     targetAngle -= rotationSpeed * Time.deltaTime;
                 }
@@ -82,7 +122,7 @@ public class PlayController : ISceneController
                 break;
             case PlayerState.repair:
                 //Testing States
-                if (Input.GetKeyDown(KeyCode.P) && repairCount < 10)
+                if ((Input.GetKeyDown(KeyCode.P) || Input.GetButton("Fire1")) && repairCount < 10)
                 {
                     repairCount++;
                     FMODUnity.RuntimeManager.PlayOneShot("event:/Repair");
@@ -100,12 +140,12 @@ public class PlayController : ISceneController
 
       
                 //12
-                if (Input.GetKeyDown(KeyCode.Q))
+                if (Input.GetKeyDown(KeyCode.Q) || Input.GetButton("Fire1"))
                 {
                     FireFunction(30);
                 }
                 //1
-                if (Input.GetKeyDown(KeyCode.W))
+                if (Input.GetKeyDown(KeyCode.W) || Input.GetButton("Fire2"))
                 {
                     FireFunction(330);
                 }
