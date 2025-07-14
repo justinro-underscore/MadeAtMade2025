@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine; 
 using UnityEngine.UI;
@@ -22,7 +23,8 @@ public class PlayController : ISceneController
     [SerializeField]
     private float moveSpeed = 2f;
 
-    private float shipAngle;
+    private float targetAngle;
+    
 
     //State Machine
     private PlayerState playerState = PlayerState.moving;
@@ -46,13 +48,11 @@ public class PlayController : ISceneController
     
                 if (Input.GetKey(KeyCode.A))
                 {
-                    // Rotate left around Z axis
-                    transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
+                    targetAngle += rotationSpeed *Time.deltaTime;
                 }
                 if (Input.GetKey(KeyCode.D))
                 {
-                    // Rotate left around Z axis
-                    transform.Rotate(0, 0, -rotationSpeed * Time.deltaTime);
+                    targetAngle -= rotationSpeed * Time.deltaTime;
                 }
                 if (Input.GetKeyDown(KeyCode.P))
                 {
@@ -64,8 +64,8 @@ public class PlayController : ISceneController
                     //Testing States
                     playerState = PlayerState.fire;
                 }
-                transform.localEulerAngles = new Vector3(0, 0, shipAngle);
-                //  transform.position += transform.up * moveSpeed * Time.deltaTime;
+                transform.localEulerAngles = new Vector3(0, 0, targetAngle);
+              //  transform.position += transform.up * moveSpeed * Time.deltaTime;
                 break;
             case PlayerState.repair:
                 if (Input.GetKeyDown(KeyCode.P))
@@ -73,16 +73,83 @@ public class PlayController : ISceneController
                     //Testing States
                     playerState = PlayerState.moving;
                     Debug.Log("we In yippie");
+                  //  transform.localEulerAngles.z = 20;
                 }
                 break;
             case PlayerState.fire:
 
-                Instantiate(cannonBall, transform.position, transform.rotation);
-                
-                playerState = PlayerState.moving;
-                transform.localEulerAngles.z = 20;
+      
+                //12
+                if (Input.GetKeyDown(KeyCode.Q))
+                {
+                    Instantiate(cannonBall, transform.position,Quaternion.Euler(0, 0,0));
+                    playerState = PlayerState.moving;
+                }
+                //1
+                if (Input.GetKeyDown(KeyCode.W))
+                {
+                    Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 330));
+                    playerState = PlayerState.moving;
+                }
+                //2
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 300));
+                    playerState = PlayerState.moving;
+                }
+                //3
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 270));
+                    playerState = PlayerState.moving;
+                }
+                //4
+                if (Input.GetKeyDown(KeyCode.T))
+                {
+                    Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 240));
+                    playerState = PlayerState.moving;
+                }
+                //5
+                if (Input.GetKeyDown(KeyCode.Y))
+                {
+                    Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 210));
+                    playerState = PlayerState.moving;
+                }
+                if (Input.GetKeyDown(KeyCode.U))
+                {
+                    Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 180));
+                    playerState = PlayerState.moving;
+                }
+                if (Input.GetKeyDown(KeyCode.I))
+                {
+                    Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 150));
+                    playerState = PlayerState.moving;
+                }
+                if (Input.GetKeyDown(KeyCode.O))
+                {
+                    Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 120));
+                    playerState = PlayerState.moving;
+                }
+                if (Input.GetKeyDown(KeyCode.P))
+                {
+                    Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 90));
+                    playerState = PlayerState.moving;
+                }
+                if (Input.GetKeyDown(KeyCode.LeftBracket))
+                {
+                    Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 60));
+                    playerState = PlayerState.moving;
+                }
+                if (Input.GetKeyDown(KeyCode.RightBracket))
+                {
+                    Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 30));
+                    playerState = PlayerState.moving;
+                }
 
-               
+
+
+
+
                 break;
         } 
        

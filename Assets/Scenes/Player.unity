@@ -235,6 +235,10 @@ PrefabInstance:
       propertyPath: cannonBall
       value: 
       objectReference: {fileID: 6292524453310457085, guid: 72dff887031ead545933a54c233d789a, type: 3}
+    - target: {fileID: 3067015368248427082, guid: a8eb6b3598163f9478457c7cf98e7eff, type: 3}
+      propertyPath: rotationSpeed
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 3067015368248427092, guid: a8eb6b3598163f9478457c7cf98e7eff, type: 3}
       propertyPath: m_RootOrder
       value: 1
