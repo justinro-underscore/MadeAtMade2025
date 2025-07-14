@@ -21,7 +21,7 @@ public class ObstacleSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Vector2 endPos = new Vector2(UnityEngine.Random.Range(-levelSize.x / 2, levelSize.x / 2), UnityEngine.Random.Range(-levelSize.y / 2, levelSize.y / 2));
+        Vector2 endPos = new Vector2(UnityEngine.Random.Range(-levelSize.x / 2, levelSize.x / 2), UnityEngine.Random.Range(400, levelSize.y / 2));
         while (startingArea.bounds.Contains(endPos))
         {
             endPos = new Vector2(UnityEngine.Random.Range(-levelSize.x / 2, levelSize.x / 2), UnityEngine.Random.Range(levelSize.y, levelSize.y - 100));
