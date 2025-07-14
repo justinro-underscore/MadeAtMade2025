@@ -58,12 +58,6 @@ public class PlayController : ISceneController
             
             case PlayerState.moving:
             RuntimeManager.StudioSystem.setParameterByName("PlayerState", 0.0f);
-                if(currentLerpCoroutine != null)
-                {
-                    StopCoroutine(currentLerpCoroutine);
-                    lerpCoroutineQueue.Clear();
-                }
-
                 if (Input.GetKey(KeyCode.A))
                 {
                     targetAngle += rotationSpeed *Time.deltaTime;
@@ -76,7 +70,8 @@ public class PlayController : ISceneController
                 {
                     playerState = PlayerState.fire;
                     RuntimeManager.StudioSystem.setParameterByName("PlayerState", 2.0f);
-                    QueueLerpCoroutine(playerState, moveSpeed, 0);
+                    //QueueLerpCoroutine(playerState, moveSpeed, 0);
+                    moveSpeed = 0;
                 }
 
                 if(moveSpeed == maxMoveSpeed)
@@ -173,8 +168,14 @@ public class PlayController : ISceneController
     {
         Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, fireAngle));
         //QueueLerpCoroutine(PlayerState.moving, 0, maxMoveSpeed);
+        if (currentLerpCoroutine != null)
+        {
+            StopCoroutine(currentLerpCoroutine);
+            lerpCoroutineQueue.Clear();
+        }
         moveSpeed = maxMoveSpeed;
         playerState = PlayerState.moving;
+        Debug.Log(moveSpeed);
         FMODUnity.RuntimeManager.PlayOneShot("event:/Shoot");
     }
 
