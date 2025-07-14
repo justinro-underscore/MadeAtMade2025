@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using FMODUnity;
 using FMOD.Studio;
+using System.Collections;
 
 public enum PlayerState
 {
@@ -22,14 +23,22 @@ public class PlayController : ISceneController
     //Move Variables.
     [SerializeField]
     private float rotationSpeed = 90f;
-    [SerializeField]
-    private float moveSpeed = 2f;
+    [SerializeField] private float moveSpeed;
+
+    private float maxMoveSpeed = 25f;
 
     private float targetAngle;
+
+    private float repairCount = 0;
     
 
     //State Machine
     private PlayerState playerState = PlayerState.moving;
+    public PlayerState PlayerState { get; set; }
+
+    Coroutine lerpCoroutine;
+
+    private float lerpDuration = 1.0f;
     public static PlayController Instance { get; private set; }
 
     protected void Awake()
@@ -39,6 +48,8 @@ public class PlayController : ISceneController
 
         else
             Destroy(gameObject);
+
+        moveSpeed = maxMoveSpeed;
     }
    
     override protected async void SceneUpdate()
@@ -47,7 +58,14 @@ public class PlayController : ISceneController
         {
             
             case PlayerState.moving:
-    
+
+                moveSpeed = maxMoveSpeed;
+
+                if(lerpCoroutine != null)
+                {
+                    StopCoroutine(lerpCoroutine);
+                }
+                
                 if (Input.GetKey(KeyCode.A))
                 {
                     targetAngle += rotationSpeed *Time.deltaTime;
@@ -60,6 +78,13 @@ public class PlayController : ISceneController
                 {
                    //Testing States
                    playerState = PlayerState.repair;
+
+                    if (lerpCoroutine != null)
+                    {
+                        StopCoroutine(lerpCoroutine);
+                    }
+                    lerpCoroutine = StartCoroutine(Lerp());
+                    repairCount++;
                 }
                 if (Input.GetKeyDown(KeyCode.O))
                 {
@@ -67,15 +92,19 @@ public class PlayController : ISceneController
                     playerState = PlayerState.fire;
                 }
                 transform.localEulerAngles = new Vector3(0, 0, targetAngle);
-              //  transform.position += transform.up * moveSpeed * Time.deltaTime;
+                transform.position += transform.up * moveSpeed * Time.deltaTime;
                 break;
             case PlayerState.repair:
-                if (Input.GetKeyDown(KeyCode.P))
+                //Testing States
+                if (Input.GetKeyDown(KeyCode.P) && repairCount < 10)
                 {
-                    //Testing States
+                    repairCount++;
+                }
+                else if(repairCount == 10)
+                {
+                    repairCount = 0;
                     playerState = PlayerState.moving;
                     Debug.Log("we In yippie");
-                  //  transform.localEulerAngles.z = 20;
                 }
                 break;
             case PlayerState.fire:
@@ -165,10 +194,28 @@ public class PlayController : ISceneController
 
 
                 break;
-        } 
-       
-     
+        }
+    }
 
+
+    IEnumerator Lerp()
+    {
+        float timeElapsed = 0;
+        float previousMovingSpeed = moveSpeed;
+
+        while (timeElapsed < lerpDuration)
+        {
+            Debug.Log(moveSpeed);
+            transform.localEulerAngles = new Vector3(0, 0, targetAngle);
+            transform.position += transform.up * moveSpeed * Time.deltaTime;
+
+            moveSpeed = Mathf.Lerp(previousMovingSpeed, 0, timeElapsed / lerpDuration);
+            timeElapsed += Time.deltaTime;
+
+            yield return null;
+        }
+
+        moveSpeed = 0;
     }
 
     override protected void SceneFixedUpdate()
