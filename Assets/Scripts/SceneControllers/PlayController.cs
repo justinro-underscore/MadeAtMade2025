@@ -58,6 +58,12 @@ public class PlayController : ISceneController
             
             case PlayerState.moving:
             RuntimeManager.StudioSystem.setParameterByName("PlayerState", 0.0f);
+                if(currentLerpCoroutine != null)
+                {
+                    StopCoroutine(currentLerpCoroutine);
+                    lerpCoroutineQueue.Clear();
+                }
+
                 if (Input.GetKey(KeyCode.A))
                 {
                     targetAngle += rotationSpeed *Time.deltaTime;
@@ -66,20 +72,7 @@ public class PlayController : ISceneController
                 {
                     targetAngle -= rotationSpeed * Time.deltaTime;
                 }
-                if (Input.GetKeyDown(KeyCode.P))
-                {
-<<<<<<< Updated upstream
-                   //Testing States
-                   playerState = PlayerState.repair;
-                   RuntimeManager.StudioSystem.setParameterByName("PlayerState", 1.0f);
-
-                    QueueLerpCoroutine(playerState, moveSpeed,0);
-                    repairCount++;
-=======
-                    RepairEntryState();
->>>>>>> Stashed changes
-                }
-                if(Input.GetKeyDown(KeyCode.O))
+                if(Input.GetKeyDown(KeyCode.Alpha0))
                 {
                     playerState = PlayerState.fire;
                     RuntimeManager.StudioSystem.setParameterByName("PlayerState", 2.0f);
@@ -104,7 +97,6 @@ public class PlayController : ISceneController
                     repairCount = 0;
                     playerState = PlayerState.moving;
                     QueueLerpCoroutine(playerState, 0, maxMoveSpeed);
-                    Debug.Log("we In yippie");
                 }
                 break;
             case PlayerState.fire:
@@ -178,7 +170,9 @@ public class PlayController : ISceneController
     private void FireFunction(float fireAngle)
     {
         Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, fireAngle));
-        QueueLerpCoroutine(PlayerState.moving, 0, maxMoveSpeed);
+        //QueueLerpCoroutine(PlayerState.moving, 0, maxMoveSpeed);
+        moveSpeed = maxMoveSpeed;
+        playerState = PlayerState.moving;
         FMODUnity.RuntimeManager.PlayOneShot("event:/Shoot");
     }
 
@@ -218,6 +212,7 @@ public class PlayController : ISceneController
     public void RepairEntryState()
     {
         playerState = PlayerState.repair;
+        RuntimeManager.StudioSystem.setParameterByName("PlayerState", 1.0f);
 
         QueueLerpCoroutine(playerState, moveSpeed, 0);
         repairCount++;
@@ -231,9 +226,5 @@ public class PlayController : ISceneController
         {
             StartCoroutine(lerpCoroutineQueue[0]);
         }
-    }
-
-    override protected void SceneFixedUpdate()
-    {
     }
 }
