@@ -9,7 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3303903806511966940, guid: 86c3e4421b80a1249bf7f5c11a21a1b8, type: 3}
       propertyPath: m_Name
-      value: Obstacle
+      value: StaticObstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8424480414255124044, guid: 86c3e4421b80a1249bf7f5c11a21a1b8, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9069538004420454311, guid: 86c3e4421b80a1249bf7f5c11a21a1b8, type: 3}
       propertyPath: m_RootOrder

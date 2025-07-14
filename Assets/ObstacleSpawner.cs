@@ -16,12 +16,19 @@ public class ObstacleSpawner : MonoBehaviour
 
     public GameObject endIsland;
     public Transform endIslandSpawn;
+    public CircleCollider2D startingArea;
 
     // Start is called before the first frame update
     void Start()
     {
-        endIslandSpawn.position = new Vector2(UnityEngine.Random.Range(-levelSize.x/2, levelSize.x/2), UnityEngine.Random.Range(-levelSize.y/2, levelSize.y/2));
-        Instantiate(endIsland, endIslandSpawn.position,endIslandSpawn.rotation);
+        Vector2 endPos = new Vector2(UnityEngine.Random.Range(-levelSize.x / 2, levelSize.x / 2), UnityEngine.Random.Range(-levelSize.y / 2, levelSize.y / 2));
+        while (startingArea.bounds.Contains(endPos))
+        {
+            endPos = new Vector2(UnityEngine.Random.Range(-levelSize.x / 2, levelSize.x / 2), UnityEngine.Random.Range(-levelSize.y / 2, levelSize.y / 2));
+            print("finding new end island location");
+        }
+        endIslandSpawn.position = endPos;
+        Instantiate(endIsland, endIslandSpawn.position, endIslandSpawn.rotation);
 
         staticObstacleSmallCollider = staticObstacleLarge.GetComponent<CapsuleCollider2D>();
         for (int x = Mathf.RoundToInt(-levelSize.x/2); x < levelSize.x/2; x += Mathf.RoundToInt(staticObstacleSmallCollider.size.x))
@@ -37,10 +44,10 @@ public class ObstacleSpawner : MonoBehaviour
                         case 0: //small static obstacle
                             Instantiate(staticObstacleSmall, pos, Quaternion.identity);
                             break;
-                        case 1:
+                        case 1: //medium static obstacle
                             Instantiate(staticObstacleMedium, pos, Quaternion.identity);
                             break;
-                        case 2:
+                        case 2: //landmass/large static obstacle
                             Instantiate(staticObstacleLarge, pos, Quaternion.identity);
                             break;
                         default:
@@ -52,6 +59,7 @@ public class ObstacleSpawner : MonoBehaviour
                 }
             }
         }
+        deleteInside(endIsland);
 
 
     }
