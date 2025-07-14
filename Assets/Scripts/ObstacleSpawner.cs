@@ -17,6 +17,7 @@ public class ObstacleSpawner : MonoBehaviour
     public GameObject endIsland;
     public Transform endIslandSpawn;
     public CircleCollider2D startingArea;
+    public Transform obstacleHolder;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,7 @@ public class ObstacleSpawner : MonoBehaviour
         //    print("finding new end island location");
         //}
         endIslandSpawn.position = endPos;
-        Instantiate(endIsland, endIslandSpawn.position, endIslandSpawn.rotation);
+        Instantiate(endIsland, endIslandSpawn.position, endIslandSpawn.rotation, obstacleHolder);
 
         staticObstacleSmallCollider = staticObstacleLarge.GetComponent<CapsuleCollider2D>();
         for (int x = Mathf.RoundToInt(-levelSize.x/2); x < levelSize.x/2; x += Mathf.RoundToInt(staticObstacleSmallCollider.size.x))
@@ -42,13 +43,13 @@ public class ObstacleSpawner : MonoBehaviour
                     switch (obsType)
                     {
                         case 0: //small static obstacle
-                            Instantiate(staticObstacleSmall, pos, Quaternion.identity);
+                            Instantiate(staticObstacleSmall, pos, Quaternion.identity, obstacleHolder);
                             break;
                         case 1: //medium static obstacle
-                            Instantiate(staticObstacleMedium, pos, Quaternion.identity);
+                            Instantiate(staticObstacleMedium, pos, Quaternion.identity, obstacleHolder);
                             break;
                         case 2: //landmass/large static obstacle
-                            Instantiate(staticObstacleLarge, pos, Quaternion.identity);
+                            Instantiate(staticObstacleLarge, pos, Quaternion.identity, obstacleHolder);
                             break;
                         default:
                             print("error! no such obstacle type!");
@@ -60,7 +61,7 @@ public class ObstacleSpawner : MonoBehaviour
             }
         }
         deleteInside(endIsland);
-        GameObject bigCentralObstacle = Instantiate(staticObstacleLarge, new Vector2(0, 200), Quaternion.identity);
+        GameObject bigCentralObstacle = Instantiate(staticObstacleLarge, new Vector2(0, 200), Quaternion.identity, obstacleHolder);
         deleteInside(bigCentralObstacle);
 
 
