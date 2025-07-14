@@ -22,11 +22,11 @@ public class ObstacleSpawner : MonoBehaviour
     void Start()
     {
         Vector2 endPos = new Vector2(UnityEngine.Random.Range(-levelSize.x / 2, levelSize.x / 2), UnityEngine.Random.Range(400, levelSize.y / 2));
-        while (startingArea.bounds.Contains(endPos))
-        {
-            endPos = new Vector2(UnityEngine.Random.Range(-levelSize.x / 2, levelSize.x / 2), UnityEngine.Random.Range(levelSize.y, levelSize.y - 100));
-            print("finding new end island location");
-        }
+        //while (startingArea.bounds.Contains(endPos))
+        //{
+        //    endPos = new Vector2(UnityEngine.Random.Range(-levelSize.x / 2, levelSize.x / 2), UnityEngine.Random.Range(levelSize.y, levelSize.y - 100));
+        //    print("finding new end island location");
+        //}
         endIslandSpawn.position = endPos;
         Instantiate(endIsland, endIslandSpawn.position, endIslandSpawn.rotation);
 

@@ -21,7 +21,7 @@ public class DirectionArrow : MonoBehaviour
         float stepValue = 1.0f * Time.deltaTime;
 
         //directionVector = Vector3.RotateTowards(transform.forward, targetVector, 100, 0.0f);
-        print(transform.up + ", " + directionVector + ", " + targetVector);
-        transform.right = targetVector;//, Vector3.forward * -1); //rotation = Quaternion.LookRotation(directionVector); //
+        //print(transform.up + ", " + directionVector + ", " + targetVector);
+        transform.up = targetVector;//, Vector3.forward * -1); //rotation = Quaternion.LookRotation(directionVector); //
     }
 }
