@@ -3,6 +3,8 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine; 
 using UnityEngine.UI;
+using FMODUnity;
+using FMOD.Studio;
 
 public enum PlayerState
 {
@@ -84,66 +86,78 @@ public class PlayController : ISceneController
                 {
                     Instantiate(cannonBall, transform.position,Quaternion.Euler(0, 0,0));
                     playerState = PlayerState.moving;
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Shoot");
                 }
                 //1
                 if (Input.GetKeyDown(KeyCode.W))
                 {
                     Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 330));
                     playerState = PlayerState.moving;
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Shoot");
                 }
                 //2
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 300));
                     playerState = PlayerState.moving;
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Shoot");
                 }
                 //3
                 if (Input.GetKeyDown(KeyCode.R))
                 {
                     Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 270));
                     playerState = PlayerState.moving;
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Shoot");
                 }
                 //4
                 if (Input.GetKeyDown(KeyCode.T))
                 {
                     Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 240));
                     playerState = PlayerState.moving;
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Shoot");
                 }
                 //5
                 if (Input.GetKeyDown(KeyCode.Y))
                 {
                     Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 210));
                     playerState = PlayerState.moving;
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Shoot");
                 }
                 if (Input.GetKeyDown(KeyCode.U))
                 {
                     Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 180));
                     playerState = PlayerState.moving;
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Shoot");
                 }
                 if (Input.GetKeyDown(KeyCode.I))
                 {
                     Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 150));
                     playerState = PlayerState.moving;
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Shoot");
                 }
                 if (Input.GetKeyDown(KeyCode.O))
                 {
                     Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 120));
                     playerState = PlayerState.moving;
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Shoot");
                 }
                 if (Input.GetKeyDown(KeyCode.P))
                 {
                     Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 90));
                     playerState = PlayerState.moving;
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Shoot");
                 }
                 if (Input.GetKeyDown(KeyCode.LeftBracket))
                 {
                     Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 60));
                     playerState = PlayerState.moving;
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Shoot");
                 }
                 if (Input.GetKeyDown(KeyCode.RightBracket))
                 {
                     Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 30));
                     playerState = PlayerState.moving;
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Shoot");
                 }
 
 
