@@ -10,6 +10,8 @@ public static class Scenes {
     public const string DeathWallScene = "DeathWallScene";
     public const string ObstaclesSceneCF = "ObstaclesSceneCF";
     public const string EndScene = "EndScene";
+    public const string MainMenu = "MainMenu";
+    public const string LoseScene = "LoseScene";
 }
 
 public class SceneController : MonoBehaviour {
@@ -17,7 +19,9 @@ public class SceneController : MonoBehaviour {
         {Scenes.Play, GameState.PLAY},
         {Scenes.Player,GameState.PLAY},
         {Scenes.DeathWallScene, GameState.PLAY},
-        {Scenes.EndScene, GameState.END}
+        {Scenes.EndScene, GameState.END},
+        {Scenes.MainMenu, GameState.MENU},
+        {Scenes.LoseScene, GameState.LOSE}
     };
 
     public static SceneController instance = null;

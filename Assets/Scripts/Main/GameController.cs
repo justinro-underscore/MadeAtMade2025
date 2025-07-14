@@ -3,8 +3,10 @@ using UnityEngine;
 
 public enum GameState {
     UNKNOWN,
+    MENU,
     PLAY,
-    END
+    END,
+    LOSE
 }
 
 public class GameController : MonoBehaviour {
@@ -35,7 +37,7 @@ public class GameController : MonoBehaviour {
         if (sceneController.activeScenes.Count == 1)
         {
             sceneController.LoadScene(Scenes.Play, false);
-            currGameState = GameState.PLAY; // Directly assign because LoadScene takes a sec
+            currGameState = GameState.MENU; // Directly assign because LoadScene takes a sec
         }
         else
         {
@@ -49,6 +51,19 @@ public class GameController : MonoBehaviour {
         string nextSceneName = null;
         switch (currGameState)
         {
+            case GameState.MENU:
+                if (newGameState == GameState.PLAY)
+                {
+                    sceneController.UnloadScene(Scenes.MainMenu);
+                    //sceneController.UnloadScene(Scenes.Player);
+                    //sceneController.UnloadScene(Scenes.DeathWallScene);
+                    nextSceneName = Scenes.Play;
+                }
+                else
+                {
+                    handled = false;
+                }
+                break;
             case GameState.PLAY:
                 if (newGameState == GameState.END)
                 {
@@ -62,8 +77,31 @@ public class GameController : MonoBehaviour {
                     handled = false;
                 }
                 break;
+            case GameState.LOSE:
+                if (newGameState == GameState.MENU)
+                {
+                    sceneController.UnloadScene(Scenes.LoseScene);
+                    //sceneController.UnloadScene(Scenes.Player);
+                    //sceneController.UnloadScene(Scenes.DeathWallScene);
+                    nextSceneName = Scenes.MainMenu;
+                }
+                else
+                {
+                    handled = false;
+                }
+                break;
             case GameState.END:
-                handled = false;
+                if (newGameState == GameState.MENU)
+                {
+                    sceneController.UnloadScene(Scenes.EndScene);
+                    //sceneController.UnloadScene(Scenes.Player);
+                    //sceneController.UnloadScene(Scenes.DeathWallScene);
+                    nextSceneName = Scenes.MainMenu;
+                }
+                else
+                {
+                    handled = false;
+                }
                 break;
             default:
                 handled = false;
