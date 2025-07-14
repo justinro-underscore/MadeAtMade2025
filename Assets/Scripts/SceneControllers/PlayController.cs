@@ -92,6 +92,7 @@ public class PlayController : ISceneController
                 if (Input.GetKeyDown(KeyCode.P) && repairCount < 10)
                 {
                     repairCount++;
+                    Debug.Log($"Repair:{repairCount}");
                 }
                 else if(repairCount == 10)
                 {
@@ -134,26 +135,32 @@ public class PlayController : ISceneController
                 {
                     FireFunction(210);
                 }
+                //6
                 if (Input.GetKeyDown(KeyCode.U))
                 {
                     FireFunction(180);
                 }
+                //7
                 if (Input.GetKeyDown(KeyCode.I))
                 {
                     FireFunction(150);
                 }
+                //8
                 if (Input.GetKeyDown(KeyCode.O))
                 {
                     FireFunction(120);
                 }
+                //9
                 if (Input.GetKeyDown(KeyCode.P))
                 {
                     FireFunction(90);
                 }
+                //10
                 if (Input.GetKeyDown(KeyCode.LeftBracket))
                 {
                     FireFunction(60);
                 }
+                //11
                 if (Input.GetKeyDown(KeyCode.RightBracket))
                 {
                     FireFunction(30);

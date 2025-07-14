@@ -275,6 +275,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Triangle
       objectReference: {fileID: 0}
+    - target: {fileID: 6171632501211213308, guid: 7b5db1f616ac2434c97949953b29ed50, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8033860341257099069, guid: 7b5db1f616ac2434c97949953b29ed50, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b5db1f616ac2434c97949953b29ed50, type: 3}
 --- !u!1001 &3067015367559747140
