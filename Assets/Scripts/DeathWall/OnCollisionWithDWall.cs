@@ -19,6 +19,6 @@ public class OnCollisionWithDWall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += transform.up * dWallSpeed;
+        transform.position += transform.up * dWallSpeed * Time.deltaTime;
     }
 }
