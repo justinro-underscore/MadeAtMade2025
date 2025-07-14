@@ -68,9 +68,12 @@ public class GameController : MonoBehaviour {
                 if (newGameState == GameState.END)
                 {
                     sceneController.UnloadScene(Scenes.Play);
-                    //sceneController.UnloadScene(Scenes.Player);
-                    //sceneController.UnloadScene(Scenes.DeathWallScene);
                     nextSceneName = Scenes.EndScene;
+                }
+                else if (newGameState == GameState.LOSE)
+                {
+                    sceneController.UnloadScene(Scenes.Play);
+                    nextSceneName = Scenes.LoseScene;
                 }
                 else
                 {

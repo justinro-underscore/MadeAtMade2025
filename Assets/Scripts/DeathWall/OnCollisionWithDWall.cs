@@ -12,8 +12,9 @@ public class OnCollisionWithDWall : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent<PlayController>(out PlayController playController))
         {
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
             Debug.Log("Game Over BB!");
+            GameController.instance.ChangeState(GameState.LOSE);
         }
     }
     // Update is called once per frame
