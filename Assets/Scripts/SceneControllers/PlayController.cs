@@ -59,6 +59,7 @@ public class PlayController : ISceneController
         {
             
             case PlayerState.moving:
+            RuntimeManager.StudioSystem.setParameterByName("PlayerState", 0.0f);
                 if (Input.GetKey(KeyCode.A))
                 {
                     targetAngle += rotationSpeed *Time.deltaTime;
@@ -71,6 +72,7 @@ public class PlayController : ISceneController
                 {
                    //Testing States
                    playerState = PlayerState.repair;
+                   RuntimeManager.StudioSystem.setParameterByName("PlayerState", 1.0f);
 
                     QueueLerpCoroutine(playerState, moveSpeed,0);
                     repairCount++;
@@ -78,6 +80,7 @@ public class PlayController : ISceneController
                 if(Input.GetKeyDown(KeyCode.O))
                 {
                     playerState = PlayerState.fire;
+                    RuntimeManager.StudioSystem.setParameterByName("PlayerState", 2.0f);
                     QueueLerpCoroutine(playerState, moveSpeed, 0);
                 }
 
