@@ -31,12 +31,12 @@ public class ObstacleSpawner : MonoBehaviour
         endIslandSpawn.position = endPos;
         Instantiate(endIsland, endIslandSpawn.position, endIslandSpawn.rotation, obstacleHolder);
 
-        staticObstacleSmallCollider = staticObstacleLarge.GetComponent<CapsuleCollider2D>();
+        staticObstacleSmallCollider = staticObstacleSmall.GetComponent<CapsuleCollider2D>();
         for (int x = Mathf.RoundToInt(-levelSize.x/2); x < levelSize.x/2; x += Mathf.RoundToInt(staticObstacleSmallCollider.size.x))
         {
             for (int y = Mathf.RoundToInt(-levelSize.y/2); y < levelSize.y/2; y += Mathf.RoundToInt(staticObstacleSmallCollider.size.y))
             {
-                if (UnityEngine.Random.value > 0.999 && !startingArea.bounds.Contains(new Vector2(x, y)))
+                if (UnityEngine.Random.value > 0.994 && !startingArea.bounds.Contains(new Vector2(x, y)))
                 {
                     Vector2 pos = new Vector2(x, y);
                     int obsType = UnityEngine.Random.Range(0, 3);

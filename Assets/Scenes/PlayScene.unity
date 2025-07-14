@@ -281,6 +281,7 @@ MonoBehaviour:
   endIsland: {fileID: 4368779224801251051, guid: 506e9ac2299f8ca4fb47da3a50f4c013, type: 3}
   endIslandSpawn: {fileID: 2082743542}
   startingArea: {fileID: 817874486}
+  obstacleHolder: {fileID: 0}
 --- !u!4 &586889224
 Transform:
   m_ObjectHideFlags: 0
@@ -337,7 +338,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.33333334, g: 0.95294124, b: 0.92549026, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -473,7 +474,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1783222516728908728, guid: f195c86ae73b7d54682b0ebec4271830, type: 3}
       propertyPath: dWallSpeed
-      value: 8
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1783222516728908734, guid: f195c86ae73b7d54682b0ebec4271830, type: 3}
       propertyPath: m_RootOrder
