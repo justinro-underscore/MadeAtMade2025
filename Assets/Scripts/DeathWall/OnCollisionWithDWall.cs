@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class OnCollisionWithDWall : MonoBehaviour
 {
-    float dWallSpeed = 0.25f;
+    [SerializeField] float dWallSpeed;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
