@@ -3,6 +3,9 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine; 
 using UnityEngine.UI;
+using FMODUnity;
+using FMOD.Studio;
+using System.Collections;
 
 public enum PlayerState
 {
@@ -20,14 +23,23 @@ public class PlayController : ISceneController
     //Move Variables.
     [SerializeField]
     private float rotationSpeed = 90f;
-    [SerializeField]
-    private float moveSpeed = 2f;
+    [SerializeField] private float moveSpeed;
+
+    private float maxMoveSpeed = 25f;
 
     private float targetAngle;
+
+    private float repairCount = 0;
     
 
     //State Machine
     private PlayerState playerState = PlayerState.moving;
+    public PlayerState PlayerState { get; set; }
+
+    List<IEnumerator> lerpCoroutineQueue = new List<IEnumerator> ();
+    Coroutine currentLerpCoroutine = null;
+
+    private float lerpDuration = 1.0f;
     public static PlayController Instance { get; private set; }
 
     protected void Awake()
@@ -37,6 +49,8 @@ public class PlayController : ISceneController
 
         else
             Destroy(gameObject);
+
+        moveSpeed = maxMoveSpeed;
     }
    
     override protected async void SceneUpdate()
@@ -45,7 +59,6 @@ public class PlayController : ISceneController
         {
             
             case PlayerState.moving:
-    
                 if (Input.GetKey(KeyCode.A))
                 {
                     targetAngle += rotationSpeed *Time.deltaTime;
@@ -58,22 +71,34 @@ public class PlayController : ISceneController
                 {
                    //Testing States
                    playerState = PlayerState.repair;
+
+                    QueueLerpCoroutine(playerState, moveSpeed,0);
+                    repairCount++;
                 }
-                if (Input.GetKeyDown(KeyCode.O))
+                if(Input.GetKeyDown(KeyCode.O))
                 {
-                    //Testing States
                     playerState = PlayerState.fire;
+                    QueueLerpCoroutine(playerState, moveSpeed, 0);
                 }
-                transform.localEulerAngles = new Vector3(0, 0, targetAngle);
-              //  transform.position += transform.up * moveSpeed * Time.deltaTime;
+
+                if(moveSpeed == maxMoveSpeed)
+                {
+                    transform.localEulerAngles = new Vector3(0, 0, targetAngle);
+                    transform.position += transform.up * moveSpeed * Time.deltaTime;
+                }
                 break;
             case PlayerState.repair:
-                if (Input.GetKeyDown(KeyCode.P))
+                //Testing States
+                if (Input.GetKeyDown(KeyCode.P) && repairCount < 10)
                 {
-                    //Testing States
+                    repairCount++;
+                }
+                else if(repairCount == 10)
+                {
+                    repairCount = 0;
                     playerState = PlayerState.moving;
+                    QueueLerpCoroutine(playerState, 0, maxMoveSpeed);
                     Debug.Log("we In yippie");
-                  //  transform.localEulerAngles.z = 20;
                 }
                 break;
             case PlayerState.fire:
@@ -82,79 +107,111 @@ public class PlayController : ISceneController
                 //12
                 if (Input.GetKeyDown(KeyCode.Q))
                 {
-                    Instantiate(cannonBall, transform.position,Quaternion.Euler(0, 0,0));
-                    playerState = PlayerState.moving;
+                    FireFunction(0);
                 }
                 //1
                 if (Input.GetKeyDown(KeyCode.W))
                 {
-                    Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 330));
-                    playerState = PlayerState.moving;
+                    FireFunction(330);
                 }
                 //2
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 300));
-                    playerState = PlayerState.moving;
+                    FireFunction(300);
                 }
                 //3
                 if (Input.GetKeyDown(KeyCode.R))
                 {
-                    Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 270));
-                    playerState = PlayerState.moving;
+                    FireFunction(270);
                 }
                 //4
                 if (Input.GetKeyDown(KeyCode.T))
                 {
-                    Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 240));
-                    playerState = PlayerState.moving;
+                    FireFunction(240);
                 }
                 //5
                 if (Input.GetKeyDown(KeyCode.Y))
                 {
-                    Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 210));
-                    playerState = PlayerState.moving;
+                    FireFunction(210);
                 }
                 if (Input.GetKeyDown(KeyCode.U))
                 {
-                    Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 180));
-                    playerState = PlayerState.moving;
+                    FireFunction(180);
                 }
                 if (Input.GetKeyDown(KeyCode.I))
                 {
-                    Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 150));
-                    playerState = PlayerState.moving;
+                    FireFunction(150);
                 }
                 if (Input.GetKeyDown(KeyCode.O))
                 {
-                    Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 120));
-                    playerState = PlayerState.moving;
+                    FireFunction(120);
                 }
                 if (Input.GetKeyDown(KeyCode.P))
                 {
-                    Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 90));
-                    playerState = PlayerState.moving;
+                    FireFunction(90);
                 }
                 if (Input.GetKeyDown(KeyCode.LeftBracket))
                 {
-                    Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 60));
-                    playerState = PlayerState.moving;
+                    FireFunction(60);
                 }
                 if (Input.GetKeyDown(KeyCode.RightBracket))
                 {
-                    Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, 30));
-                    playerState = PlayerState.moving;
+                    FireFunction(30);
                 }
-                
-
-
-
 
                 break;
-        } 
-       
-     
+        }
+    }
 
+    void FireFunction(float fireAngle)
+    {
+        Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, fireAngle));
+                QueueLerpCoroutine(PlayerState.moving, 0, maxMoveSpeed);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Shoot");
+    }
+
+    IEnumerator Lerp(PlayerState entryPlayerState, float startSpeed, float endSpeed)
+    {
+        float timeElapsed = 0;
+
+        while (timeElapsed < lerpDuration)
+        {
+            Debug.Log(moveSpeed);
+            transform.localEulerAngles = new Vector3(0, 0, targetAngle);
+            transform.position += transform.up * moveSpeed * Time.deltaTime;
+
+            moveSpeed = Mathf.Lerp(startSpeed, endSpeed, timeElapsed / lerpDuration);
+            timeElapsed += Time.deltaTime;
+
+            yield return null;
+        }
+
+        if (entryPlayerState == PlayerState.moving)
+        {
+            moveSpeed = maxMoveSpeed;
+            playerState = PlayerState.moving;
+        }
+        else
+        {
+            moveSpeed = 0;
+        }
+
+        lerpCoroutineQueue.RemoveAt(0);
+
+        if(lerpCoroutineQueue.Count > 0)
+        {
+            StartCoroutine(lerpCoroutineQueue[0]);
+        }
+    }
+
+    private void QueueLerpCoroutine(PlayerState entryPlayerState, float startSpeed, float endSpeed)
+    {
+        lerpCoroutineQueue.Add(Lerp(entryPlayerState, startSpeed, endSpeed));
+
+       if(currentLerpCoroutine == null)
+        {
+            StartCoroutine(lerpCoroutineQueue[0]);
+        }
     }
 
     override protected void SceneFixedUpdate()
