@@ -8,7 +8,7 @@ public class cannonBall : MonoBehaviour
     private float movespeed = 10f;
 
     private float timeCounter = 0f;
-    private float deleteTime = 1f;
+    private float deleteTime = 2f;
     // Update is called once per frame
     void Update()
     {

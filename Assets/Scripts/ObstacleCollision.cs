@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObstacleCollision : MonoBehaviour
@@ -17,6 +18,7 @@ public class ObstacleCollision : MonoBehaviour
         {
             Debug.Log("Hit this obstacle " + gameObject.name);
             obstacleHealth.OnDamage(1);
+            Destroy(collision.gameObject);
         }
     }
 }
