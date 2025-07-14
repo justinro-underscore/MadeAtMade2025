@@ -90,10 +90,12 @@ public class PlayController : ISceneController
                 if (Input.GetKeyDown(KeyCode.P) && repairCount < 10)
                 {
                     repairCount++;
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Repair");
                     Debug.Log($"Repair:{repairCount}");
                 }
                 else if(repairCount == 10)
                 {
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/Repaired");
                     repairCount = 0;
                     playerState = PlayerState.moving;
                     QueueLerpCoroutine(playerState, 0, maxMoveSpeed);
