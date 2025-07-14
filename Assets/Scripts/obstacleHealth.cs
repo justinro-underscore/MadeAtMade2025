@@ -38,7 +38,7 @@ public class obstacleHealth : MonoBehaviour, IHealth
     void OnCollisionEnter(Collision collision)
     {
         GameObject collidingObject = collision.gameObject;
-        if (collidingObject.tag == "cannonball")
+        if (collidingObject.tag == "Cannonball")
         {
             damage(1);
             Destroy(collidingObject);
