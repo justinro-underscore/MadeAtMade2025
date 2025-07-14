@@ -49,8 +49,6 @@ public class PlayController : ISceneController
 
         else
             Destroy(gameObject);
-
-        moveSpeed = maxMoveSpeed;
     }
    
     override protected async void SceneUpdate()
@@ -70,12 +68,16 @@ public class PlayController : ISceneController
                 }
                 if (Input.GetKeyDown(KeyCode.P))
                 {
+<<<<<<< Updated upstream
                    //Testing States
                    playerState = PlayerState.repair;
                    RuntimeManager.StudioSystem.setParameterByName("PlayerState", 1.0f);
 
                     QueueLerpCoroutine(playerState, moveSpeed,0);
                     repairCount++;
+=======
+                    RepairEntryState();
+>>>>>>> Stashed changes
                 }
                 if(Input.GetKeyDown(KeyCode.O))
                 {
@@ -173,20 +175,19 @@ public class PlayController : ISceneController
         }
     }
 
-    void FireFunction(float fireAngle)
+    private void FireFunction(float fireAngle)
     {
         Instantiate(cannonBall, transform.position, Quaternion.Euler(0, 0, fireAngle));
-                QueueLerpCoroutine(PlayerState.moving, 0, maxMoveSpeed);
+        QueueLerpCoroutine(PlayerState.moving, 0, maxMoveSpeed);
         FMODUnity.RuntimeManager.PlayOneShot("event:/Shoot");
     }
 
-    IEnumerator Lerp(PlayerState entryPlayerState, float startSpeed, float endSpeed)
+    private IEnumerator Lerp(PlayerState entryPlayerState, float startSpeed, float endSpeed)
     {
         float timeElapsed = 0;
 
         while (timeElapsed < lerpDuration)
         {
-            Debug.Log(moveSpeed);
             transform.localEulerAngles = new Vector3(0, 0, targetAngle);
             transform.position += transform.up * moveSpeed * Time.deltaTime;
 
@@ -212,6 +213,14 @@ public class PlayController : ISceneController
         {
             StartCoroutine(lerpCoroutineQueue[0]);
         }
+    }
+
+    public void RepairEntryState()
+    {
+        playerState = PlayerState.repair;
+
+        QueueLerpCoroutine(playerState, moveSpeed, 0);
+        repairCount++;
     }
 
     private void QueueLerpCoroutine(PlayerState entryPlayerState, float startSpeed, float endSpeed)

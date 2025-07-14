@@ -13,9 +13,10 @@ public class PlayerCollision : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Obstacle"))
+        Debug.Log("I hit... " + collision.gameObject.name);
+        if (collision.gameObject.CompareTag("Obstacle"))
         {
-            controller.PlayerState = PlayerState.repair;
+            controller.RepairEntryState();
         }
     }
 }
