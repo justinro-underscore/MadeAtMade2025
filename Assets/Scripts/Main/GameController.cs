@@ -3,7 +3,8 @@ using UnityEngine;
 
 public enum GameState {
     UNKNOWN,
-    PLAY
+    PLAY,
+    END
 }
 
 public class GameController : MonoBehaviour {
@@ -49,6 +50,19 @@ public class GameController : MonoBehaviour {
         switch (currGameState)
         {
             case GameState.PLAY:
+                if (newGameState == GameState.END)
+                {
+                    sceneController.UnloadScene(Scenes.Play);
+                    sceneController.UnloadScene(Scenes.Player);
+                    sceneController.UnloadScene(Scenes.DeathWallScene);
+                    nextSceneName = Scenes.EndScene;
+                }
+                else
+                {
+                    handled = false;
+                }
+                break;
+            case GameState.END:
                 handled = false;
                 break;
             default:

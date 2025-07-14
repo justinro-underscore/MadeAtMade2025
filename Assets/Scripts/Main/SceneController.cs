@@ -9,13 +9,15 @@ public static class Scenes {
     public const string Player = "Player";
     public const string DeathWallScene = "DeathWallScene";
     public const string ObstaclesSceneCF = "ObstaclesSceneCF";
+    public const string EndScene = "EndScene";
 }
 
 public class SceneController : MonoBehaviour {
     private IDictionary<string, GameState> gameSceneStateMapping = new Dictionary<string, GameState>() {
         {Scenes.Play, GameState.PLAY},
         {Scenes.Player,GameState.PLAY},
-        {Scenes.DeathWallScene, GameState.PLAY}
+        {Scenes.DeathWallScene, GameState.PLAY},
+        {Scenes.EndScene, GameState.END}
     };
 
     public static SceneController instance = null;
