@@ -60,6 +60,8 @@ public class ObstacleSpawner : MonoBehaviour
             }
         }
         deleteInside(endIsland);
+        GameObject bigCentralObstacle = Instantiate(staticObstacleLarge, new Vector2(0, 0), Quaternion.identity);
+        deleteInside(bigCentralObstacle);
 
 
     }
