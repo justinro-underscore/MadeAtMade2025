@@ -35,7 +35,7 @@ public class ObstacleSpawner : MonoBehaviour
         {
             for (int y = Mathf.RoundToInt(-levelSize.y/2); y < levelSize.y/2; y += Mathf.RoundToInt(staticObstacleSmallCollider.size.y))
             {
-                if (UnityEngine.Random.value > 0.999)
+                if (UnityEngine.Random.value > 0.999 && !startingArea.bounds.Contains(new Vector2(x, y)))
                 {
                     Vector2 pos = new Vector2(x, y);
                     int obsType = UnityEngine.Random.Range(0, 3);
