@@ -24,7 +24,7 @@ public class ObstacleSpawner : MonoBehaviour
         Vector2 endPos = new Vector2(UnityEngine.Random.Range(-levelSize.x / 2, levelSize.x / 2), UnityEngine.Random.Range(-levelSize.y / 2, levelSize.y / 2));
         while (startingArea.bounds.Contains(endPos))
         {
-            endPos = new Vector2(UnityEngine.Random.Range(-levelSize.x / 2, levelSize.x / 2), UnityEngine.Random.Range(levelSize.y - 100, levelSize.y / 2));
+            endPos = new Vector2(UnityEngine.Random.Range(-levelSize.x / 2, levelSize.x / 2), UnityEngine.Random.Range(levelSize.y, levelSize.y - 100));
             print("finding new end island location");
         }
         endIslandSpawn.position = endPos;
